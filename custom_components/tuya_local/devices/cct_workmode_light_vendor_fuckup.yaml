@@ -1,0 +1,38 @@
+name: CCT light (work_mode based)
+entities:
+  - entity: light
+    class: light
+    dps:
+      # Power - DP ID: 1
+      - id: 1
+        type: boolean
+        name: switch
+
+      # Brightness (10–1000 → HA 0–255) - DP ID: 3
+      - id: 3
+        type: integer
+        name: brightness
+        range:
+          min: 10
+          max: 1000
+        mapping:
+          - scale: 255
+            step: 1
+
+      # Color temperature (0–1000 → Kelvin) - DP ID: 4
+      - id: 4
+        type: integer
+        name: color_temp
+        range:
+          min: 0
+          max: 1000
+        mapping:
+          - target_range: # Vendor fuckup the mapping
+              min: 6500
+              max: 2700
+
+      # Work mode (internal, not exposed directly to HA) - DP ID: 2
+      - id: 2
+        type: string
+        name: _work_mode
+        hidden: true
