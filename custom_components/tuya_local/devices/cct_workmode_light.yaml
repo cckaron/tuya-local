@@ -3,13 +3,13 @@ entities:
   - entity: light
     class: light
     dps:
-      # Power
-      - id: switch_led
+      # Power - DP ID: 1
+      - id: 1
         type: boolean
         name: switch
 
-      # Brightness (0–1000 → HA 0–255)
-      - id: bright_value_v2
+      # Brightness (10–1000 → HA 0–255) - DP ID: 3
+      - id: 3
         type: integer
         name: brightness
         range:
@@ -19,8 +19,8 @@ entities:
           - scale: 255
             step: 1
 
-      # Color temperature (0–1000 → Kelvin)
-      - id: temp_value_v2
+      # Color temperature (0–1000 → Kelvin) - DP ID: 4
+      - id: 4
         type: integer
         name: color_temp
         range:
@@ -31,8 +31,8 @@ entities:
               min: 2700
               max: 6500
 
-      # Work mode (internal, not exposed directly to HA)
-      - id: work_mode
+      # Work mode (internal, not exposed directly to HA) - DP ID: 2
+      - id: 2
         type: string
         name: _work_mode
         hidden: true
