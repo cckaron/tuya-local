@@ -56,6 +56,7 @@ class TuyaLocalLight(TuyaLocalEntity, LightEntity):
         self._rgbhsv_dps = dps_map.pop("rgbhsv", None)
         self._named_color_dps = dps_map.pop("named_color", None)
         self._effect_dps = dps_map.pop("effect", None)
+        self._work_mode_dps = dps_map.pop("_work_mode", None)
         self._init_end(dps_map)
 
         # Set min and max color temp
@@ -324,6 +325,18 @@ class TuyaLocalLight(TuyaLocalEntity, LightEntity):
                     settings,
                 ),
             }
+            # For devices that require work_mode to be set before temp_value_v2,
+            # automatically inject work_mode="white" when setting color temperature
+            if self._work_mode_dps:
+                _LOGGER.debug("Injecting work_mode=white for color temperature control")
+                settings = {
+                    **settings,
+                    **self._work_mode_dps.get_values_to_set(
+                        self._device,
+                        "white",
+                        settings,
+                    ),
+                }
         elif self._rgbhsv_dps and (
             ATTR_HS_COLOR in params
             or (ATTR_BRIGHTNESS in params and self._brightness_control_by_hsv())
