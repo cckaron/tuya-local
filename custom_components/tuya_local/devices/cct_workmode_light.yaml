@@ -8,13 +8,14 @@ entities:
         type: boolean
         name: switch
 
-      # Brightness (10–1000 → HA 0–255) - DP ID: 3
+      # Brightness - DP ID: 3
+      # Brightness Mapping Table: 50 -> 20%, 100 -> 40%, 203 -> 80%, 255 -> 100%
       - id: 3
         type: integer
         name: brightness
         range:
-          min: 52
-          max: 255
+          min: 10
+          max: 1000
 
 
       # Color temperature (0–1000 → Kelvin) - DP ID: 4

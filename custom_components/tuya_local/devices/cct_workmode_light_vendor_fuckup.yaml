@@ -16,7 +16,6 @@ entities:
           min: 52
           max: 255
 
-
       # Color temperature (0–1000 → Kelvin) - DP ID: 4
       - id: 4
         type: integer
