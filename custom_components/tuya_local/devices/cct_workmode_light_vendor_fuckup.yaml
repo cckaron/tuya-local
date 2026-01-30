@@ -12,8 +12,8 @@ entities:
       - id: 3
         type: integer
         name: brightness
-        range:
-          min: 10
+        range: # The minimum brightness is 200, not 10
+          min: 200
           max: 1000
         mapping:
           - scale: 255
